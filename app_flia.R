@@ -4,14 +4,14 @@
 # ***************************************************************************
 library(rio)
 library(shinyWidgets)
-library(tidyverse)
+library(dplyr)
 library(janitor)
+library(extrafont)
 library(plotly)
 library(DT)
 library(shiny)
 library(ggtext)
 library(stringr)
-library(shinyWidgets)
 library(ggrepel)
 library(shinycssloaders)
 library(bslib)
@@ -2764,7 +2764,9 @@ server <- function(input, output, session) {
              scale_color_brewer(name = "", palette = paleta)  
            
            
-         } else {}
+         } else {
+           
+         }
          
            # Gráficos de línea por sexo y panel para cortes 
          print(g1)
@@ -2868,7 +2870,9 @@ server <- function(input, output, session) {
                                                 targets = "_all"))))
            
            
-           } else{}
+         } else {
+             
+           }
        
        })      
 
@@ -3312,7 +3316,9 @@ server <- function(input, output, session) {
            #   scale_fill_brewer(name = "", palette = paleta2)
            
                
-         } else {}
+         } else {
+           
+         }
          
          # Gráficos de línea por sexo y panel para cortes 
          print(g1)
@@ -3537,7 +3543,9 @@ server <- function(input, output, session) {
                                                       targets = "_all"))))
                
            
-         } else{}
+             } else {
+           
+         }
          
        })      
        
@@ -3764,7 +3772,9 @@ server <- function(input, output, session) {
                                             rowNames = TRUE)
                        
                        
-           } else{}
+           } else {
+             
+           }
            
            
          })  
@@ -3838,7 +3848,9 @@ server <- function(input, output, session) {
                y = "") +
              scale_fill_brewer(name = "", palette = paleta)           
            
-         } else {}
+         } else {
+           
+         }
          
          print(g1)
          
@@ -3916,7 +3928,9 @@ server <- function(input, output, session) {
                                       list(list(className = 'dt-center', 
                                                 targets = "_all"))))
            
-         } else{}
+         } else {
+           
+         }
        })      
        
        
@@ -3985,7 +3999,9 @@ server <- function(input, output, session) {
              
              
              
-           } else{}
+           } else {
+             
+           }
            
            
            
@@ -4108,7 +4124,9 @@ server <- function(input, output, session) {
                y = "") +
              scale_color_brewer(name = "", palette = paleta)  
            
-         } else {}
+         } else {
+           
+         }
          
          # Gráficos de línea por sexo y panel para cortes 
          print(g1)
@@ -4173,7 +4191,9 @@ server <- function(input, output, session) {
                                       list(list(className = 'dt-center', 
                                                 targets = "_all"))))
            
-         } else{}
+         } else {
+           
+         }
          
        })      
        
@@ -4233,7 +4253,9 @@ server <- function(input, output, session) {
                                   rowNames = TRUE)
              
              
-           } else {}
+           } else {
+             
+           }
            
            
          })  
@@ -4423,7 +4445,9 @@ server <- function(input, output, session) {
            
            
            
-         } else {}
+         } else {
+           
+         }
          
          # Gráficos de línea por sexo y panel para cortes 
          print(g1)
@@ -4538,7 +4562,9 @@ server <- function(input, output, session) {
            
            
            
-         } else{}
+         } else {
+           
+         }
          
        })      
        
@@ -4654,7 +4680,9 @@ server <- function(input, output, session) {
                                   rowNames = TRUE)
              
              
-           } else {}
+           } else {
+             
+           }
            
            
          })  

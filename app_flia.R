@@ -1086,6 +1086,7 @@ server <- function(input, output, session) {
      
    }) 
    
+  
    base_CE_pu <- reactive({
      df %>%
        filter(CATEGORIA == "Composición y estructura de los hogares" & PESTAÑA== "País urbano" &

@@ -4,8 +4,8 @@ library(dplyr)
 
 ### Carga y modifica los datos 
 
-df <- rio::import("Base_motor_02082024.xls")
-#df <- rio::import("Base_Motor_familia_20052024.xlsx")
+#df <- rio::import("Base_motor_02082024.xls")
+df <- rio::import("Base_motor.xls")
 metadata <- rio::import("Fichas_Familia.xls")
 
 
@@ -99,8 +99,8 @@ df <- df %>% mutate(SEXO = case_when(NOMINDICADOR=="Tasa de participación de mu
                                      NOMINDICADOR=="Tasa de participación de mujeres y varones entre 14 y 49 años con presencia de menores de 4 en el hogar (Varón)" ~ "Varones",
                                      NOMINDICADOR=="Tasa de participación de mujeres y varones entre 14 y 49 años con presencia de menores de 7 en el hogar (Mujer)" ~ "Mujeres",
                                      NOMINDICADOR=="Tasa de participación de mujeres y varones entre 14 y 49 años con presencia de menores de 7 en el hogar (Varón)" ~ "Varones",
-                                     NOMINDICADOR=="Tasa de participación de mujeres y varones entre 14 y 49 años con presencia de menores de 12 en el hogar (Mujer)" ~ "Mujeres",
-                                     NOMINDICADOR=="Tasa de participación de mujeres y varones entre 14 y 49 años con presencia de menores de 12 en el hogar (Varón)" ~ "Varones",
+                                     NOMINDICADOR=="Tasa de participación de mujeres y varones entre 14 y 49 años con presencia de menores de 13 en el hogar (Mujer)" ~ "Mujeres",
+                                     NOMINDICADOR=="Tasa de participación de mujeres y varones entre 14 y 49 años con presencia de menores de 13 en el hogar (Varón)" ~ "Varones",
                                      TRUE ~ SEXO))
 
 df <- df %>% mutate (benef1 = case_when(

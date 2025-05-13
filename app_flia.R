@@ -1202,13 +1202,12 @@ server <- function(input, output, session) {
 
      if(substr(input$indicador_CE_tp,1,4)=="Dist"&input$corte1!="Total") {
        selectInput("anio1", "Año:",
-                   choices = unique(base_CE_tp()$FECHA2[base_CE_tp()$NOMINDICADOR ==input$indicador_CE_tp]))
+                   choices = unique(base_CE_tp()$FECHA2[base_CE_tp()$NOMINDICADOR ==input$indicador_CE_tp&
+                                                        base_CE_tp()$CORTE1_rec ==input$corte1]))
                    } else  {
- 
+
      }
    })
-   
-   
    
    
    output$anio2 <- renderUI({

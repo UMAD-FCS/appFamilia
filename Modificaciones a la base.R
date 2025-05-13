@@ -91,17 +91,15 @@ df <- df %>% mutate(VIOLENCIA = case_when(NOMINDICADOR=="Prevalencia de violenci
 
 df <- df %>% mutate(SEXO2 = case_when(NOMINDICADOR=="Distribución porcentual de los hogares según sexo del jefe/a (Mujer)" ~ "Mujer",
                                       NOMINDICADOR=="Distribución porcentual de los hogares según sexo del jefe/a (Varón)" ~ "Varón",
+                                      NOMINDICADOR=="Tasa de participación de mujeres y varones entre 14 y 49 años sin menores en el hogar (Mujer)" ~ "Mujeres",
+                                      NOMINDICADOR=="Tasa de participación de mujeres y varones entre 14 y 49 años sin menores en el hogar (Varón)" ~ "Varones",
+                                      NOMINDICADOR=="Tasa de participación de mujeres y varones entre 14 y 49 años con presencia de menores de 4 en el hogar (Mujer)" ~ "Mujer",
+                                      NOMINDICADOR=="Tasa de participación de mujeres y varones entre 14 y 49 años con presencia de menores de 4 en el hogar (Varón)" ~ "Varones",
+                                      NOMINDICADOR=="Tasa de participación de mujeres y varones entre 14 y 49 años con presencia de menores de 7 en el hogar (Mujer)" ~ "Mujeres",
+                                      NOMINDICADOR=="Tasa de participación de mujeres y varones entre 14 y 49 años con presencia de menores de 7 en el hogar (Varón)" ~ "Varones",
+                                      NOMINDICADOR=="Tasa de participación de mujeres y varones entre 14 y 49 años con presencia de menores de 13 en el hogar (Mujer)" ~ "Mujeres",
+                                      NOMINDICADOR=="Tasa de participación de mujeres y varones entre 14 y 49 años con presencia de menores de 13 en el hogar (Varón)" ~ "Varones",
                                       TRUE ~ "Todos"))
-
-df <- df %>% mutate(SEXO = case_when(NOMINDICADOR=="Tasa de participación de mujeres y varones entre 14 y 49 años sin menores en el hogar (Mujer)" ~ "Mujeres",
-                                     NOMINDICADOR=="Tasa de participación de mujeres y varones entre 14 y 49 años sin menores en el hogar (Varón)" ~ "Varones",
-                                     NOMINDICADOR=="Tasa de participación de mujeres y varones entre 14 y 49 años con presencia de menores de 4 en el hogar (Mujer)" ~ "Mujer",
-                                     NOMINDICADOR=="Tasa de participación de mujeres y varones entre 14 y 49 años con presencia de menores de 4 en el hogar (Varón)" ~ "Varones",
-                                     NOMINDICADOR=="Tasa de participación de mujeres y varones entre 14 y 49 años con presencia de menores de 7 en el hogar (Mujer)" ~ "Mujeres",
-                                     NOMINDICADOR=="Tasa de participación de mujeres y varones entre 14 y 49 años con presencia de menores de 7 en el hogar (Varón)" ~ "Varones",
-                                     NOMINDICADOR=="Tasa de participación de mujeres y varones entre 14 y 49 años con presencia de menores de 13 en el hogar (Mujer)" ~ "Mujeres",
-                                     NOMINDICADOR=="Tasa de participación de mujeres y varones entre 14 y 49 años con presencia de menores de 13 en el hogar (Varón)" ~ "Varones",
-                                     TRUE ~ SEXO))
 
 df <- df %>% mutate (benef1 = case_when(
   NOMINDICADOR=="Porcentaje de personas según beneficios en el trabajo para la crianza (Actividades especiales para perpiodos de vacaciones). Ambos." ~ "Actividades especiales para períodos de vacaciones",
@@ -344,13 +342,15 @@ df <- df %>% mutate(CORTE1= case_when(SEXO!="Todos" ~ "SEXO",
                                       QUINTIL!="Todos" ~  "QUINTIL",
                                       TERCIL!="Todos" ~  "TERCIL",
                                       EDAD!="Todos" ~  "EDAD",
-                                      POBRE!="Todos" ~  "POBRE",
+                                      POBRE=="Pobre"|POBRE=="No pobre"| 
+                                      POBRE=="Hogares no en situación de pobreza"| 
+                                      POBRE=="Hogares en situación de pobreza" ~  "POBRE - MET 2006",
+                                      POBRE=="Pobre - Met 2017"|POBRE=="No pobre - Met 2017" ~  "POBRE - MET 2017",
                                       NSE!="Todos" ~  "NSE",
                                       NIVELEDU!="Todos" ~  "NIVELEDU",
                                       EDAD_HIJ!="Todos" ~  "EDAD_HIJ",
                                       benef2!= "Todos" ~ "benef2",
                                       URBANORURALUY!="Total país" ~  "URBANORURALUY"))
-
 
 df <- df %>% mutate(CORTE2= case_when(EDADSALIDA!="Todos" ~  "EDADSALIDA",
                                       QSALIDA!="Todos"~"QSALIDA",
@@ -369,28 +369,6 @@ df <- df %>% mutate(CORTE2= case_when(EDADSALIDA!="Todos" ~  "EDADSALIDA",
                                       CICLOVIDA!="Todos"~"CICLOVIDA",
                                       NINT!="Todos"~"NINT",
                                       TRUE ~ "NA"))
-
-##Corrige corte 1 y corte 2 de Tasa de participación de varones y mujeres entre 14 y 49 años:
-
-df <- df %>% mutate(CORTE2 = case_when(
-  substring(NOMINDICADOR, 1, 32)=="Tasa de participación de mujeres" ~ "SEXO",
-  TRUE ~ CORTE2))
-
-df <- df %>% mutate(CORTE1= case_when(substring(NOMINDICADOR, 1, 32)=="Tasa de participación de mujeres"&ASCENDENCIA!="Todos" ~  "ASCENDENCIA",
-                                      substring(NOMINDICADOR, 1, 32)=="Tasa de participación de mujeres"&QUINTIL!="Todos" ~  "QUINTIL",
-                                      substring(NOMINDICADOR, 1, 32)=="Tasa de participación de mujeres"&TERCIL!="Todos" ~  "TERCIL",
-                                      substring(NOMINDICADOR, 1, 32)=="Tasa de participación de mujeres"&EDAD!="Todos" ~  "EDAD",
-                                      substring(NOMINDICADOR, 1, 32)=="Tasa de participación de mujeres"&POBRE!="Todos" ~  "POBRE",
-                                      substring(NOMINDICADOR, 1, 32)=="Tasa de participación de mujeres"&NSE!="Todos" ~  "NSE",
-                                      substring(NOMINDICADOR, 1, 32)=="Tasa de participación de mujeres"&NIVELEDU!="Todos" ~  "NIVELEDU",
-                                      substring(NOMINDICADOR, 1, 32)=="Tasa de participación de mujeres"&EDAD_HIJ!="Todos" ~  "EDAD_HIJ",
-                                      substring(NOMINDICADOR, 1, 32)=="Tasa de participación de mujeres"&benef2!= "Todos" ~ "benef2",
-                                      substring(NOMINDICADOR, 1, 32)=="Tasa de participación de mujeres"&URBANORURALUY!="Total país" ~  "URBANORURALUY",
-                                      TRUE ~ CORTE1))
-
-df <- df %>% mutate(CORTE1= case_when(substring(NOMINDICADOR, 1, 32)=="Tasa de participación de mujeres"&CORTE1=="SEXO" ~ NA,
-                                      TRUE ~ CORTE1))
-  
 
 
 
@@ -420,7 +398,8 @@ df <- df %>% mutate(CORTE1_rec = case_when(CORTE1=="ASCENDENCIA" ~ "Ascendencia 
                                            CORTE1=="EDAD_HIJ" ~ "Edad al tener el primer hijo",
                                            CORTE1=="NIVELEDU" ~ "Nivel educativo",
                                            CORTE1=="NSE" ~ "Nivel socioeconómico",
-                                           CORTE1=="POBRE" ~ "Pobreza",
+                                           CORTE1=="POBRE - MET 2006" ~ "Pobreza - Met 2006",
+                                           CORTE1=="POBRE - MET 2017" ~ "Pobreza - Met 2017",
                                            CORTE1=="QUINTIL" ~ "Quintil de ingresos",
                                            CORTE1=="TERCIL" ~ "Tercil de ingresos",
                                            CORTE1=="SEXO" ~ "Sexo",
@@ -461,6 +440,16 @@ metadata <- metadata %>% mutate(calculo = `FORMA DE CÁLCULO`)
 metadata <- metadata %>% mutate(NOTAS2 = case_when(is.na(NOTAS2) == T ~ "Sin observaciones",
                                                    is.na(NOTAS2) == F ~ NOTAS2))
 
+## Genero dos columnas de pobreza: una para cada metodología
+
+df <- df %>% mutate(`POBRE - MET 2006` = case_when(CORTE1 == "POBRE - MET 2006" ~ POBRE,
+                                                   TRUE ~ "Todos")) 
+df <- df %>% mutate(`POBRE - MET 2017` = case_when(POBRE == "Pobre - Met 2017" ~ "Pobre",
+                                                   POBRE == "No pobre - Met 2017" ~ "No pobre",
+                                                   TRUE ~ "Todos")) 
+
+                                        
+## Cambio nombres acorde a corte1_rec
 df<-rename(df,
            `Ascendencia étnico racial`=ASCENDENCIA,
            `Perceptor de beneficios`=benef2,
@@ -469,7 +458,8 @@ df<-rename(df,
            `Edad al tener el primer hijo`=EDAD_HIJ,
            `Nivel educativo`=NIVELEDU ,
            `Nivel socioeconómico`=NSE ,
-           Pobreza=POBRE,
+           `Pobreza - Met 2006`=`POBRE - MET 2006`,
+           `Pobreza - Met 2017`=`POBRE - MET 2017`,
            `Quintil de ingresos`=QUINTIL,
            Sexo= SEXO,
            Región=URBANORURALUY,
@@ -595,10 +585,10 @@ df <- df %>% mutate(Departamento = case_when(
   Departamento=="Todos"&(NOMINDICADOR=="Tasa de divorcios"|NOMINDICADOR=="Tasa de nupcialidad") ~ "Total país",
   TRUE ~ Departamento))
 
-df <- df %>% mutate(Pobreza = case_when(
-  Pobreza=="Hogares en situación de pobreza" ~ "Pobre",
-  Pobreza=="Hogares no en situación de pobreza" ~ "No pobre",
-  TRUE ~ Pobreza))
+df <- df %>% mutate(`Pobreza - Met 2006` = case_when(
+  `Pobreza - Met 2006`=="Hogares en situación de pobreza" ~ "Pobre",
+  `Pobreza - Met 2006`=="Hogares no en situación de pobreza" ~ "No pobre",
+  TRUE ~ `Pobreza - Met 2006`))
 
 df <- df %>%  
   arrange(NOMINDICADOR, FECHA)  

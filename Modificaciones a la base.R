@@ -93,7 +93,7 @@ df <- df %>% mutate(SEXO2 = case_when(NOMINDICADOR=="Distribución porcentual de
                                       NOMINDICADOR=="Distribución porcentual de los hogares según sexo del jefe/a (Varón)" ~ "Varón",
                                       NOMINDICADOR=="Tasa de participación de mujeres y varones entre 14 y 49 años sin menores en el hogar (Mujer)" ~ "Mujeres",
                                       NOMINDICADOR=="Tasa de participación de mujeres y varones entre 14 y 49 años sin menores en el hogar (Varón)" ~ "Varones",
-                                      NOMINDICADOR=="Tasa de participación de mujeres y varones entre 14 y 49 años con presencia de menores de 4 en el hogar (Mujer)" ~ "Mujer",
+                                      NOMINDICADOR=="Tasa de participación de mujeres y varones entre 14 y 49 años con presencia de menores de 4 en el hogar (Mujer)" ~ "Mujeres",
                                       NOMINDICADOR=="Tasa de participación de mujeres y varones entre 14 y 49 años con presencia de menores de 4 en el hogar (Varón)" ~ "Varones",
                                       NOMINDICADOR=="Tasa de participación de mujeres y varones entre 14 y 49 años con presencia de menores de 7 en el hogar (Mujer)" ~ "Mujeres",
                                       NOMINDICADOR=="Tasa de participación de mujeres y varones entre 14 y 49 años con presencia de menores de 7 en el hogar (Varón)" ~ "Varones",

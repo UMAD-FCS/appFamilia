@@ -2627,10 +2627,10 @@ server <- function(input, output, session) {
          if(input$corte4 == "Total" & substring(input$indicador_CUID_tp, 1, 32)=="Tasa de participación de varones"){
            
            dat <- base_CUID_tp() %>% filter(NOMINDICADOR == input$indicador_CUID_tp & is.na(CORTE1) == T) %>%
-                       arrange(Sexo)%>%
+                       arrange(`Sexo del jefe/a`)%>%
                        arrange(FECHA)           
            g1 <- dat %>% ggplot(aes(x = as.Date(as.character(FECHA), format = "%Y"), y = as.numeric(VALOR), alpha = metodo, 
-                                    group = Sexo, color = Sexo)) +
+                                    group = `Sexo del jefe/a`, color = `Sexo del jefe/a`)) +
              geom_line(dat = dat %>% filter(FECHA <= 2019),
                        size = 1, alpha = 0.4) +
              geom_line(dat = dat %>% filter(FECHA >= 2022),
@@ -2672,7 +2672,7 @@ server <- function(input, output, session) {
              geom_line(dat = dat %>% filter(FECHA >= 2022),
                        size = 1, alpha = 0.8) +
              geom_point(size = 2, show.legend = FALSE) +
-             facet_wrap(~ Sexo) +
+             facet_wrap(~ `Sexo del jefe/a`) +
              theme_minimal() +
              theme(legend.position = "bottom",
                    legend.title = element_blank(),
@@ -2801,11 +2801,11 @@ server <- function(input, output, session) {
            dat <- base_CUID_tp() %>% filter(NOMINDICADOR == input$indicador_CUID_tp & is.na(CORTE1) == T)
            
            datatable(dat  %>% 
-                       arrange(Sexo)%>%
+                       arrange(`Sexo del jefe/a`)%>%
                        arrange(FECHA)%>%
                        transmute(
                          "Año" = FECHA,
-                         "Sexo" = Sexo,
+                         "Sexo" = `Sexo del jefe/a`,
                          "Valor" = VALOR),
                      rownames = FALSE,
                      options = list(columnDefs = 
@@ -2825,7 +2825,7 @@ server <- function(input, output, session) {
                        arrange(FECHA)%>%
                        transmute(
                          "Año" = FECHA,
-                         "Sexo" = Sexo,
+                         "Sexo" = `Sexo del jefe/a`,
                          !!cut_nom := !!cut,
                          "Valor" = VALOR),
                      rownames = FALSE,
@@ -2896,7 +2896,7 @@ server <- function(input, output, session) {
                                           arrange(FECHA)%>%
                                           transmute(
                                             "Año" = FECHA,
-                                            "Sexo" = Sexo,
+                                            "Sexo" = `Sexo del jefe/a`,
                                             "Valor" = VALOR),
                                         "Metadata" = base_CUID_tp() %>%
                                           dplyr::distinct(NOMINDICADOR,FUENTE,DEFINICIÓN,`FORMA DE CÁLCULO`)%>%
@@ -2923,7 +2923,7 @@ server <- function(input, output, session) {
                                           arrange(FECHA)%>%
                                           transmute(
                                             "Año" = FECHA,
-                                            "Sexo" = Sexo,
+                                            "Sexo" = `Sexo del jefe/a`,
                                             !!cut_nom := !!cut,
                                             "Valor" = VALOR),
                                         "Metadata" = base_CUID_tp() %>%

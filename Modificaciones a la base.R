@@ -5,7 +5,7 @@ library(dplyr)
 ### Carga y modifica los datos 
 
 #df <- rio::import("Base_motor_02082024.xls")
-df <- rio::import("Base_motor.xls")
+df <- rio::import("Base_Motor_familia.xlsx")
 metadata <- rio::import("Fichas_Familia.xls")
 
 
